@@ -14,8 +14,11 @@ body=$(printf '%s' "$input" | jq -r '
 
 [ -z "$body" ] && exit 0
 
-# Only guard civic repos.
-owner=$(git -C "$(dirname "$path")" config --get github.user 2>/dev/null || true)
+# Only guard civic sessions. Resolve from cwd, not the target path — writes to
+# the scratchpad or any non-repo directory would otherwise skip the check.
+cwd=$(printf '%s' "$input" | jq -r '.cwd // ""')
+owner=$(git -C "$cwd" config --get github.user 2>/dev/null || true)
+[ -z "$owner" ] && owner=$(git -C "$(dirname "$path")" config --get github.user 2>/dev/null || true)
 [ "$owner" != "ngabantudev" ] && exit 0
 
 # Skip the files whose job is to talk about the policy.
