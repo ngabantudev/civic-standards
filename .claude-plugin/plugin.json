@@ -1,0 +1,8 @@
+{
+  "name": "civic-standards",
+  "description": "Shared standards for ngabantudev civic-tech repos: primary-source discipline, systems-not-individuals scope, open-source posture, and new-repo scaffolding.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Steve Yang"
+  }
+}
