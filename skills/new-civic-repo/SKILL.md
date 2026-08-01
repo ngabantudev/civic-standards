@@ -46,7 +46,7 @@ The block is deliberately short. It states the boundary and points at the plugin
 Claude Code reads `CLAUDE.md`; other agents read `AGENTS.md`. Symlink so they never diverge:
 
 ```
-ln -sf CLAUDE.md AGENTS.md
+ln -sf AGENTS.md CLAUDE.md
 ```
 
 If `AGENTS.md` already exists as a real file with different content, report the difference rather than clobbering it.
