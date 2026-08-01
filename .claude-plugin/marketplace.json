@@ -1,0 +1,7 @@
+{
+  "name": "civic-standards",
+  "owner": { "name": "Steve Yang" },
+  "plugins": [
+    { "name": "civic-standards", "source": "./" }
+  ]
+}
