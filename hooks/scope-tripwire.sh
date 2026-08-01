@@ -26,6 +26,15 @@ case "$path" in
   */CLAUDE.md|*/AGENTS.md|*/CONTRIBUTING.md|*/CODE_OF_CONDUCT.md|*/SKILL.md|*/.github/*) exit 0 ;;
 esac
 
+# Officials directories opt in per repo. Declared office-field names are
+# exempted; bare personal identifiers still block, even here.
+allow_officials=$(git -C "$cwd" config --get civic.allowOfficials 2>/dev/null || true)
+if [ "$allow_officials" = "true" ]; then
+  ALLOWED='(official_name|officeholder|office_title|office_contact|office_phone|office_email|term_start|term_end)'
+  body=$(printf '%s' "$body" | grep -vEi "$ALLOWED" || true)
+  [ -z "$body" ] && exit 0
+fi
+
 PATTERN='(first_name|last_name|full_name|middle_name|maiden_name)'
 PATTERN+='|(date_of_birth|dob|birth_date)'
 PATTERN+='|(a_number|alien_number|alien_registration)'
